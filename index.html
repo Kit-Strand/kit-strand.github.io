@@ -3,235 +3,398 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kit Strand — Author</title>
-  <meta name="description" content="Kit Strand is the author of Pending Inventory and The Field in Working Order.">
+  <title>Kit Strand</title>
+  <meta name="description" content="Kit Strand is the author of the Pending Inventory trilogy — literary fiction set in a near-future of systems, classification, and the people who live inside them.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --ink: #1a1814;
+      --ink-mid: #3d3830;
+      --ink-light: #7a7060;
+      --ink-faint: #b0a898;
+      --paper: #f5f0e8;
+      --paper-warm: #ede7d8;
+      --rule: #c8bfaf;
+      --accent: #5c3d1e;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --cream: #f5f0e8;
-      --ink: #1a1714;
-      --ink-light: #4a4540;
-      --ink-faint: #8a8278;
-      --rule: #c8bfb0;
-      --accent: #2c3e2d;
-    }
-
-    html { font-size: 16px; scroll-behavior: smooth; }
+    html { font-size: 18px; scroll-behavior: smooth; }
 
     body {
-      background-color: var(--cream);
+      background: var(--paper);
       color: var(--ink);
       font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1.125rem;
       line-height: 1.7;
-      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Subtle paper grain */
-    body::before {
-      content: '';
+    /* NAV */
+    nav {
       position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1000;
-      opacity: 0.6;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 56px;
     }
 
-    /* ── LAYOUT ── */
-    .container {
+    .nav-name {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
+    .hero {
+      padding: 130px 2.5rem 80px;
       max-width: 680px;
       margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* ── HEADER ── */
-    header {
-      padding: 5rem 0 3rem;
       border-bottom: 1px solid var(--rule);
-      animation: fadeUp 0.8s ease both;
     }
 
-    .site-name {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 2.75rem;
-      font-weight: 300;
-      letter-spacing: 0.04em;
+    .hero-name {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
       line-height: 1.1;
       color: var(--ink);
+      margin-bottom: 1.4rem;
     }
 
-    .site-tagline {
-      margin-top: 0.6rem;
-      font-size: 0.95rem;
-      font-style: italic;
-      color: var(--ink-faint);
-      letter-spacing: 0.02em;
-    }
-
-    /* ── ABOUT ── */
-    .about {
-      padding: 3.5rem 0 3rem;
-      border-bottom: 1px solid var(--rule);
-      animation: fadeUp 0.8s 0.15s ease both;
-    }
-
-    .about p {
-      color: var(--ink-light);
+    .hero-bio {
       font-size: 1.05rem;
-      max-width: 560px;
+      color: var(--ink-mid);
+      max-width: 520px;
+      line-height: 1.75;
     }
 
-    /* ── BOOKS ── */
-    .books {
-      padding: 3.5rem 0;
-      animation: fadeUp 0.8s 0.3s ease both;
+    /* SECTIONS */
+    section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 70px 2.5rem;
+      border-bottom: 1px solid var(--rule);
     }
+
+    section:last-of-type { border-bottom: none; }
 
     .section-label {
       font-size: 0.75rem;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--ink-faint);
       margin-bottom: 2.5rem;
       font-family: 'Libre Baskerville', Georgia, serif;
     }
 
+    /* BOOKS */
     .book {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
-      padding: 2.5rem 0;
-      border-top: 1px solid var(--rule);
+      gap: 0.6rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--paper-warm);
     }
 
-    .book:last-child {
-      border-bottom: 1px solid var(--rule);
-    }
+    .book:first-of-type { border-top: none; padding-top: 0; }
 
     .book-meta {
       display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
     }
 
     .book-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.7rem;
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.15rem;
+      font-style: italic;
       font-weight: 400;
-      line-height: 1.2;
       color: var(--ink);
     }
 
-    .book-status {
-      display: inline-block;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
+    .book-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      font-family: 'Libre Baskerville', Georgia, serif;
-      padding: 0.25em 0.7em;
-      border: 1px solid var(--rule);
       color: var(--ink-faint);
     }
 
-    .book-status.available {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .book-description {
-      font-size: 1rem;
-      color: var(--ink-light);
-      line-height: 1.75;
-      max-width: 520px;
+    .book-desc {
+      font-size: 0.97rem;
+      color: var(--ink-mid);
+      line-height: 1.7;
+      max-width: 500px;
     }
 
     .book-link {
       display: inline-block;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1px solid var(--ink);
-      padding-bottom: 0.1em;
-      transition: color 0.2s, border-color 0.2s;
-      font-family: 'Libre Baskerville', Georgia, serif;
-    }
-
-    .book-link:hover {
+      margin-top: 0.9rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--accent);
-      border-color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+      transition: opacity 0.2s;
     }
 
-    /* ── FOOTER ── */
-    footer {
-      padding: 2.5rem 0 4rem;
-      animation: fadeUp 0.8s 0.45s ease both;
-    }
+    .book-link:hover { opacity: 0.65; }
 
-    footer p {
-      font-size: 0.85rem;
+    .book-link.coming-soon {
       color: var(--ink-faint);
+      border-color: var(--ink-faint);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* SHORT FICTION */
+    .story-header {
+      margin-bottom: 3rem;
+    }
+
+    .story-title {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .story-byline {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-faint);
+      text-transform: uppercase;
+    }
+
+    .story-body {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--ink-mid);
+    }
+
+    .story-body p {
+      margin-bottom: 1.1em;
+    }
+
+    .story-body p.indent {
+      text-indent: 1.6em;
+      margin-bottom: 0;
+    }
+
+    .story-body .section-break {
+      text-align: center;
+      color: var(--ink-faint);
+      margin: 2rem 0;
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+    }
+
+    .story-body em {
       font-style: italic;
     }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* FOOTER */
+    footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 2.5rem;
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
     }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 480px) {
-      .site-name { font-size: 2.1rem; }
-      .book-title { font-size: 1.45rem; }
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1.2rem; }
+      section, .hero, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <header>
-      <h1 class="site-name">Kit Strand</h1>
-      <p class="site-tagline">Fiction</p>
-    </header>
+  <nav>
+    <a class="nav-name" href="#top">Kit Strand</a>
+    <ul class="nav-links">
+      <li><a href="#books">Books</a></li>
+      <li><a href="#fiction">Fiction</a></li>
+    </ul>
+  </nav>
 
-    <section class="about">
-      <p>Kit Strand writes literary fiction about systems, mechanisms, and the people who work inside them. Based in England.</p>
-    </section>
-
-    <section class="books">
-      <p class="section-label">Books</p>
-
-      <div class="book">
-        <div class="book-meta">
-          <h2 class="book-title">Pending Inventory</h2>
-          <span class="book-status available">Available now</span>
-          <p class="book-description">A near-future thriller. A compliance worker whose job is to smooth the language around harm discovers, one night, that the language and the harm are not so easily separated.</p>
-          <a class="book-link" href="https://www.amazon.co.uk/dp/B0GQV68NBM/" target="_blank" rel="noopener">Order from Amazon →</a>
-        </div>
-      </div>
-
-      <div class="book">
-        <div class="book-meta">
-          <h2 class="book-title">The Field in Working Order</h2>
-          <span class="book-status">Coming soon</span>
-          <p class="book-description">A farmer goes to the city to pay a debt. Over twelve years, he builds the assessment frameworks, the contribution indices, the access provisions — the mechanisms that extract from his own farm. A novel about good work and what it costs.</p>
-        </div>
-      </div>
-
-    </section>
-
-    <footer>
-      <p>© Kit Strand 2026</p>
-      <p style="margin-top: 0.5rem;"><a href="mailto:kitstrandauthor@gmail.com" style="color: var(--ink-faint); font-style: italic; font-size: 0.85rem; text-decoration: none; border-bottom: 1px solid var(--rule);">kitstrandauthor@gmail.com</a></p>
-    </footer>
-
+  <div class="hero" id="top">
+    <h1 class="hero-name">Kit Strand</h1>
+    <p class="hero-bio">Literary fiction set in a near-future of systems, classification, and the people who build them, live inside them, and become them. The <em>Pending Inventory</em> trilogy follows what happens when the mechanisms work exactly as intended.</p>
   </div>
+
+  <section id="books">
+    <p class="section-label">Books</p>
+
+    <div class="book">
+      <div class="book-meta">
+        <span class="book-title">Pending Inventory</span>
+        <span class="book-number">I</span>
+      </div>
+      <p class="book-desc">Elliot works in compliance. The system is functioning. He is thorough, accurate, and has not filed a disputed form in six years. A novel about what it costs to be good at this.</p>
+      <a class="book-link" href="https://www.amazon.co.uk/dp/B0DKJXQW3Q" target="_blank" rel="noopener">Available on Amazon</a>
+    </div>
+
+    <div class="book">
+      <div class="book-meta">
+        <span class="book-title">The Field in Working Order</span>
+        <span class="book-number">II</span>
+      </div>
+      <p class="book-desc">Notice. Fourteen months. A city. An allocation office. Cael leaves. He intends all of it as protection. Twelve years later, he comes home. A novel about a man who built the mechanisms carefully, applied them honestly, and watched them take everything anyway.</p>
+      <a class="book-link coming-soon" href="#">Coming soon</a>
+    </div>
+
+    <div class="book">
+      <div class="book-meta">
+        <span class="book-title">Working Towards</span>
+        <span class="book-number">III</span>
+      </div>
+      <p class="book-desc">Two voices, three movements. Cora is a nurse who knows how the language works. Rose is four years old and does not yet. A novel about the distance between them, and what fills it.</p>
+      <a class="book-link coming-soon" href="#">Coming soon</a>
+    </div>
+  </section>
+
+  <section id="fiction">
+    <p class="section-label">Short Fiction</p>
+
+    <div class="story-header">
+      <h2 class="story-title">Before the Language Arrives</h2>
+      <p class="story-byline">Kit Strand &mdash; ~1,700 words</p>
+    </div>
+
+    <div class="story-body">
+
+      <p>He remembers being four years old in a field.</p>
+
+      <p class="indent">Not the field's name, not whose field it was, not the season with any certainty. But the quality of the light: flat and warm, coming from somewhere to his left. He had been lying on his back. He had been looking at the sky. He had not been thinking about anything in particular because he had not yet developed the apparatus for anything in particular. He was just there, in the field, with the light and the grass and the sky, and it was sufficient.</p>
+
+      <p class="indent">He does not think about this often. He thinks about it now because of the child.</p>
+
+      <div class="section-break">*</div>
+
+      <p>The form is four pages. He has been processing forms like this for long enough that he reads them for structure rather than content: not what they say but what they produce, the profile that accumulates in the system once the boxes are filled. He knew the profile before he opened the file.</p>
+
+      <p class="indent">The child is three years and four months old. The referral has come from the community health team, flagged under the early intervention protocol, which means someone has already made an assessment and the form is the mechanism for making that assessment legible to the next system.</p>
+
+      <p class="indent">He reads the referral note.</p>
+
+      <p class="indent"><em>Limited engagement with structured activities. Atypical response to adult-directed play. Strong preference for solitary exploratory behaviour. Sensory sensitivity noted across multiple domains.</em></p>
+
+      <p class="indent">He reads this and understands it. He has been trained to understand it. He knows what each phrase maps to in the assessment framework, knows the coding that will follow from this vocabulary, knows the likely pathway. He has processed four hundred and twelve forms in the past two years and each one has produced a pathway and the pathways have a logic and the logic is sound.</p>
+
+      <p class="indent">He reads it again.</p>
+
+      <p class="indent"><em>Strong preference for solitary exploratory behaviour.</em></p>
+
+      <p class="indent">He thinks about the field.</p>
+
+      <div class="section-break">*</div>
+
+      <p>He was five when he started school. He remembers the smell of the classroom: the blue soap, the warmth of many small bodies in an enclosed space, something sweet underneath. He remembers learning to write his name. The letters had to be formed in a particular order; there was a correct way and an incorrect way, and the correct way was demonstrated and the incorrect way was gently redirected. He learned the correct way. He was good at it. The teacher wrote <em>good effort</em> at the top of the page and he felt the weight of this, how the two words changed the shape of what he had done, made it legible to a register outside himself.</p>
+
+      <p class="indent">He has been legible ever since.</p>
+
+      <div class="section-break">*</div>
+
+      <p>The waiting area is visible from his desk through a glass partition that was installed when the office moved to the open-plan configuration three years ago. He can see it without meaning to. Usually he does not look.</p>
+
+      <p class="indent">Today he looks.</p>
+
+      <p class="indent">The child is sitting on the floor beside a low table that has soft toys on it, the kind designed to be handled and mouthed and thrown, the kind that come in primary colours because primary colours have been assessed as developmentally appropriate for this age range. The toys are on the table. The child is not interacting with them. The child is looking at the gap between the table leg and the floor, where the light from the window falls at an angle and makes a thin bright line on the carpet.</p>
+
+      <p class="indent">He watches the child watch the light.</p>
+
+      <p class="indent">The child's hand comes out slowly and moves through the bright line. Then back through it. The child does this several times, not performing it, not looking to see if anyone had noticed, just doing it, with the focused attention of someone engaged in genuine inquiry. What does light do when you move through it. What is the boundary between the bright and the not-bright.</p>
+
+      <p class="indent">He has not thought about that question since he was very small.</p>
+
+      <p class="indent">A practitioner comes into the waiting area, clipboard in hand, and says the child's name. The child looks up. The attention withdraws from the light and relocates, correctly and promptly, to the adult who is addressing it. The child stands. The child is led through the door to the assessment room.</p>
+
+      <p class="indent">The line of light is still on the carpet. Nobody is looking at it.</p>
+
+      <div class="section-break">*</div>
+
+      <p>He fills in the form. He is thorough. He has always been thorough; thoroughness was noted in his first performance review and in every one since, seven years of reviews, seven years of notes in a file somewhere that constitute the official record of what he is and what he does. He fills in the boxes accurately, cross-references the referral note against the assessment criteria, applies the coding correctly.</p>
+
+      <p class="indent">The coding is not punitive. He would not do this work if the coding were punitive. The coding is designed to ensure the child receives appropriate support, appropriate intervention, appropriate resource allocation in a system with finite resource. The coding is care. He believes this. He has believed it for seven years because the evidence supports it and he is not a person who maintains beliefs without evidence.</p>
+
+      <p class="indent">He reaches the section on developmental trajectory. The form asks him to code the child's profile against four domains: communication, social engagement, self-regulation, and learning readiness. There is a fifth box at the bottom of the section: <em>Additional factors relevant to provision planning.</em></p>
+
+      <p class="indent">He looks at this box for a while.</p>
+
+      <p class="indent">He could write: the child spent approximately eight minutes investigating the behaviour of light on a surface, with sustained concentration and evident curiosity, adjusting the inquiry in response to what the investigation produced. He could write: this does not appear in any of the four domains listed above. He could write: I am not certain the framework has a category for it.</p>
+
+      <p class="indent">He does not write this. The framework does not have a category for it, and what the framework does not have a category for cannot appear in the record, and what does not appear in the record does not, for the purposes of provision planning, exist. He knows this. It is not a flaw in the framework. It is what frameworks are for: to make the assessable assessable and route the rest to the appropriate mechanism.</p>
+
+      <p class="indent">He leaves the box blank.</p>
+
+      <p class="indent">He files the form.</p>
+
+      <p class="indent">He sits for a moment.</p>
+
+      <p class="indent">Outside the office window the city does what it does in the late afternoon: the contribution kiosks cycling amber, the crowd rails folded back for the evening lull, the long shadows from the residential towers reaching across the distribution plaza toward the canal. He has worked at this desk for three years. He will work at it for longer. The number is moving and the number requires this.</p>
+
+      <p class="indent">Somewhere in the system there is a file that contains his records. It is thirty years old, filed in a system that no longer exists, describing a version of him that preceded the assessment apparatus that has since been applied to him, in various forms, every year of his working life.</p>
+
+      <p class="indent">The version of him the form described was a child lying in a field looking at the sky with his arms out.</p>
+
+      <p class="indent"><em>Strong preference for solitary exploratory behaviour,</em> probably.</p>
+
+      <div class="section-break">*</div>
+
+      <p>He takes the train home.</p>
+
+      <p class="indent">The platform is busy with the end-of-day movement: the bodies reorganising themselves from the day's purpose to the evening's. He watches them move and can read them, not the individuals but the patterns, the crowd's logic, the way it finds its gradient and flows. He learned to read this as he learned to read everything in the city: by proximity and repetition, until what had been noise became information and what had been information became background and what had been background became the ground beneath every other thing he knew.</p>
+
+      <p class="indent">He wonders at what point the grass stopped being sufficient.</p>
+
+      <p class="indent">He wonders if there was a point, or whether it was a process: slow, continuous, the apparatus for specific thoughts accumulating word by word, year by year, form by form, until the field was no longer the field but the idea of a field, the category <em>field,</em> legible to the system and therefore reducible to it.</p>
+
+      <p class="indent">He does not know. He does not have enough data. The transition happened in the interval before he had the tools to document it, and what is not documented did not, for the system's purposes, occur.</p>
+
+      <p class="indent">The train arrives. He gets on. He holds the rail and watches the city move past the window, its logic fully legible to him, its grammar his grammar, and underneath it somewhere, not lost and not recoverable, present in a way he no longer has the language for: the field, the light, the sky, his arms out, nobody's data.</p>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; Kit Strand. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
